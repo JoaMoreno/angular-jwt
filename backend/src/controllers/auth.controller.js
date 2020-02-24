@@ -38,4 +38,7 @@ authCtrl.singIn = async (req, res) => {
     });
 };
 
+authCtrl.profile = async (req, res) => {
+    res.json("Profile")
+}
 module.exports = authCtrl;

@@ -19,4 +19,6 @@ router.route('/private-tasks')
 router.post('/singup', authCtrl.singUp)
 router.post('/singin', authCtrl.singIn)
 
+router.get('/profile', authCtrl.profile)
+
 module.exports = router;
