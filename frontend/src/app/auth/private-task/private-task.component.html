@@ -1,1 +1,15 @@
-<p>private-task works!</p>
+<h3>Private Tasks</h3>
+<br>
+<div class="row">
+    <div class="col-md-4" *ngFor="let task of privateTasks">
+        <div class="card">
+            <div class="card-body">
+                <h4>{{task.name}}</h4>
+                <p>{{task.description}}</p>
+            </div>
+            <div class="card-footer">
+                {{task.date | date: 'shortDate'}}
+            </div>
+        </div>
+    </div>
+</div>

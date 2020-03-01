@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { TasksService } from '../services/tasks.service';
 
 @Component({
   selector: 'app-public-task',
@@ -7,9 +8,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PublicTaskComponent implements OnInit {
 
-  constructor() { }
+  tasks: any = [];
+
+  constructor(
+    private taskService: TasksService
+  ) { }
 
   ngOnInit(): void {
+    this.taskService.getPublicTasks()
+      .subscribe(
+        res => {
+          console.log(res);
+          this.tasks = res;
+        },
+        err => console.log(err)
+      )
   }
 
 }

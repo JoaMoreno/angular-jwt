@@ -3,22 +3,23 @@ const coreCtrl = {};
 
 coreCtrl.verifyToken = async (req, res, next) => {
     try {
-        if (!req.headers['x-access-token']) {
+        //console.log(req.headers)
+        if (!req.headers['authorization']) {
             return res.status(401).json({
                 auth: false,
-                message:'Unauhtorized Request'})
+                message:'Unauhtorized Request headers null'})
         }
 
         /* por convencion los token llevan la palabra 'Bearer '
         con esto se optiene el token solamente */
-        const token = req.headers['x-access-token'].split(' '/* < Need 2 spaces */)[1];
-        // const token = req.headers['x-access-token'];
+        const token = req.headers['authorization'].split(' '/* < Need 2 spaces */)[1];
+        // const token = req.headers['authorization'];
         // console.log(" * Token: "+token)
 
         if (token === 'null') {
             return res.status(401).json({
                 auth: false,
-                message:'Unauhtorized Request'})
+                message:'Unauhtorized Request token null'})
         }
 
         const payload = await jwt.verify(token, process.env.SECRET_KEY);
@@ -26,9 +27,9 @@ coreCtrl.verifyToken = async (req, res, next) => {
         if (!payload) {
             return res.status(401).json({
                 auth: false,
-                message:'Unauhtorized Request'})
+                message:'Unauhtorized Request payload null'})
         }
-
+        //console.log(payload)
         req.userId = payload._id;
         req.auth = true
         next();
